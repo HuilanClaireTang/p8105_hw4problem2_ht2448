@@ -4,8 +4,7 @@ author: "HuilanTang_CandaceHaghighi"
 date: "10/27/2017"
 output: html_document
 ---
-
-# Setup
+## Setup
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(
@@ -19,7 +18,7 @@ library(tidyverse)
 library(dplyr)
 ```
 
-## Load and Tidy data-Lead
+## Load and Tidy: Data-Lead
 ```{r load and tidy the data}
 # load and tidy the pols_month dataset
 pols_data = read_csv("./fivethirtyeight_datasets/pols-month.csv") %>% 
@@ -42,3 +41,16 @@ GDP_data = read_csv("./fivethirtyeight_datasets/GDP.csv") %>%
 # combine the two datasets to pols_GDP_data
 pols_GDP_data = left_join(pols_data, GDP_data, by = "date")
 ```
+
+## Creating Plot: Data-Collaborator
+```{r, line graph}
+pols_GDP_data %>%
+  group_by(president) %>%
+  ggplot(aes(x = date, y = as.numeric(value),  group = president, color = president))   + 
+  geom_point(aes(color = president), alpha = .5) +
+  geom_smooth(se = FALSE) +
+    labs(title = "GDP Value Over Time", x = "Date", y = "GDP Value") +
+    theme(plot.title = element_text(hjust = 0.5), axis.ticks.y = element_blank())
+```
+
+#### According to the 'GDP Value Over Time' line graph, Democratic presidents appear to be generally associated with higher GDP when compared to Republican presidents. However, this trend appears to have been reversed beginning around 2001.

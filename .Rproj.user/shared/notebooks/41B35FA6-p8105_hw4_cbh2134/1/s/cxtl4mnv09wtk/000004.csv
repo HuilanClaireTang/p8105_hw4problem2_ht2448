@@ -1,0 +1,6 @@
+"0","pup_data = read_csv(""../data/FAS_pups.csv"", col_types = ""ciiiii"") %>%"
+"0","  clean_names() %>%"
+"0","  mutate(sex = recode(sex, `1` = ""male"", `2` = ""female"")) %>%"
+"0","  gather(key = PD_outcome, value = pd, pd_ears : pd_walk) %>%"
+"0","  separate(PD_outcome, into = c(""remove"", ""PD_outcome""), sep = ""_"") %>%"
+"0","  select(-remove)"

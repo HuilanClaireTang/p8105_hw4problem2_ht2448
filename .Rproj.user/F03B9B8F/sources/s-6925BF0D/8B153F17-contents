@@ -1,0 +1,31 @@
+---
+title: "p8105_hw4_cbh2134"
+author: "Candace Haghighi_Huilan Tang"
+date: "10/25/2017"
+output: html_document
+---
+##Problem 1 
+
+> Initializing libraries.
+
+```{r}
+library(tidyverse)
+library(haven)
+library(readxl)
+library(janitor)
+library(ggridges)
+library(ggthemes) 
+library(dplyr)
+```
+
+> Loading and tidying the FAS_pups dataset. 
+
+```{r}
+pup_data = read_csv("../data/FAS_pups.csv", col_types = "ciiiii") %>%
+  clean_names() %>%
+  mutate(sex = recode(sex, `1` = "male", `2` = "female")) %>%
+  gather(key = PD_outcome, value = pd, pd_ears : pd_walk) %>%
+  separate(PD_outcome, into = c("remove", "PD_outcome"), sep = "_") %>%
+  select(-remove)
+View(pup_data)
+```

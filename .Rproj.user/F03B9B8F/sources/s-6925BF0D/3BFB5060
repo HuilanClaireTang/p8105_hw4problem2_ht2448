@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1509243168796.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3BFB5060",
+    "lastKnownWriteTime" : 1508947510,
+    "last_content_update" : 1508947510,
+    "path" : "~/Downloads/p8105_hw4_sr3461-master/p8105_hw4_sr3461.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "38,3",
+        "scrollLine" : "11"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

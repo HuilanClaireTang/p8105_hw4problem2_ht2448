@@ -1,0 +1,204 @@
+---
+title: "Homework 1 solutions"
+output:
+  html_document: 
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Due date
+
+Due: September 25 at 5:00pm. 
+
+### Points
+
+* Problem 0.1: 20 points
+* Problem 0.2: 20 points
+* Problem 1: 20 points
+* Problem 2: 20 points
+* Problem 3: 20 points
+
+### Problem 0.1
+
+* create a directory named `p8105_hw1_YOURUNI` (e.g. `p8105_hw1_ajg2202` for Jeff)
+* put an R project in the directory
+* create a single .Rmd file named `p8105_hw1_YOURUNI.Rmd`
+
+### Problem 0.2
+
+This "problem" focuses on correct styling for your solutions to Problems 1+. We will look for:
+
+* meaningful variable names
+* readable code (one command per line; adequate whitespace and indentation; etc)
+* the use of both text and code in solutions
+* a lack of superfluous code (e.g. no unused variables are defined)
+
+### Problem 1
+
+This problem focuses on vector operations and numeric summaries.
+
+* Create a vector containing ten numbers
+* Multiply your vector by 5
+* Add 7 to your vector
+
+Below is a vector containing 10 numbers.
+
+```{r ten_numbers}
+set.seed(1988)
+
+# create vector containing 10 numbers
+ten_num = rnorm(10)
+
+ten_num
+```
+
+My vector multiplied by 5 is:
+
+```{r ten_numbers_times5}
+ten_num * 5
+```
+
+My vector plus 7 is:
+
+```{r ten_numbers_plus7}
+ten_num + 7
+```
+
+* Create a second vector containing ten integers
+* Add the two vectors
+* Multiply the two vectors
+
+I then create another vector containing integers 1 through 10.
+
+```{r ten_ints}
+ten_ints = 1:10
+ten_ints
+```
+
+Adding the two vectors gives:
+
+```{r add_vecs}
+ten_num + ten_ints
+
+```
+
+Multiplying the two vectors gives:
+
+```{r multiply_vecs}
+ten_num * ten_ints
+```
+
+
+Try to add vectors of length ten and length nine and length ten and length five. Attempting to add vectors of lengths 10 and 9 gives a warning message: "longer object length is not a multiple of shorter object length". When adding vectors of length 10 and 5 we do not get this warning.
+
+```{r sum_lengths, eval = TRUE}
+
+1:10 + 1:9
+1:10 + 1:5
+
+```
+
+When adding a vector to a scalar, the scalar gets added to each element of the vector. However, when adding two vectors of equal length, only the elements that occur at the same index are added together. If you have two vectors that are not the same length, the elements of the vector of shorter length are recycled and added to each element of the longer length vector.
+
+### Problem 2
+
+This problem focuses on subsetting, plotting, and the use of inline R code.
+
+* Create a variable containing a random sample of size 10000 from a uniform[0, 10] distribution (the `runif` function will help)
+* Remove values that are greater than 9.4
+* Write a short description of your vector using inline R code, including:
+    * length of the vector
+    * mean and median
+    * standard deviation
+    * minumum and maximum values
+* Repeat the above for a new random sample of size 5000 from a Normal[5, sd = 5] distribution, omitting values that are less than zero
+* Make a histogram of the new sample. 
+
+```{r problem2_uniform}
+# draw 10,000 values from a uniform[0, 10]
+values = runif(10000, 0, 10)
+
+# remove values greater than 0.94
+values = values[values <= 9.4]
+
+```
+
+I drew 10,000 values from a uniform[0, 10] distribution then removed values greater than 9.4. After subsetting, the **length** of the vector is `r length(values)`. The **mean** is `r round(mean(values),2)`, the **median** is `r round(median(values),2)`, and **standard deviation** is `r round(sd(values),2)`. 
+
+I then drew 5000 samples from a Normal[5, sd = 5] distribution and ommited values less than zero. A histogram is below.
+
+```{r problem2_normal}
+values_normal = rnorm(5000, 5, 5)
+values_normal = values_normal[values_normal >= 0]
+
+hist(values_normal)
+```
+
+After removing values less than zero, the sample size is `r length(values_normal)`.
+
+### Problem 3
+
+This problem focuses on variable types, coercion, and data structures.
+
+* Create a vector containing five integers and vector containing five character strings
+* Add the two vectors. What happens? 
+* Combine the two vectors into one using `c()`. What is the class of the new vector?
+* Create a vector containing the values `"a"`, `7`, and `42`.
+    * Can you add the second and third values of this vector? Why or why not?
+* Create a list containing the values `"a"`, `7`, and `42`.
+    * Can you add the second and third values of this list? Why or why not?
+
+```{r problem3}
+
+# create a vector containing 5 integers and a vector containing five character strings
+vec_integer = 1:5
+vec_character = c("chocolate", "vanilla", "strawberry", "mint", "peanut butter")
+
+vec_integer
+vec_character
+```
+
+I have created a vector with integers 1:5 and another vector with 5 character strings that represent flavors of ice cream. When I add the two vectors I get an error! These vectors cannot be added together because they have different classes.
+
+```{r add_vectors, eval = FALSE}
+vec_integer + vec_character
+```
+
+When I combine the two vectors into one vector using `c()` it looks like this:
+
+```{r combine_vectors}
+vec_both = c(vec_integer, vec_character)
+vec_both
+
+```
+
+The combined vector is length `r length(vec_both)` and has class `r class(vec_both)`.
+
+Now I create a vector containing the values `"a"`, `7`, and `42`, and attempt to add it's second and third elements.
+
+```{r, eval = FALSE}
+# create the vector
+vec_new = c("a", 7 ,42)
+
+# add second and third elements
+vec_new[2] + vec_new[3]
+```
+
+You cannot add the second and third elements! Because `"a"` is a character, all other elements of the vector also are forced to take character values.
+
+Next I will create a list with the same values, `"a"`, `7`, and `42`, and attempt to add them.
+
+```{r}
+# create the list
+list_new = list("a", 7, 42)
+
+list_new[[2]] + list_new[[3]]
+```
+
+We can add the second and third elements of the list! This is because a list can contain elements that have different classes. In our list, `"a"` has a class character and `7` and `42` take on class numeric.
+
+

@@ -1,0 +1,44 @@
+---
+title: "hw4problem2"
+author: "HuilanTang_CandaceHaghighi"
+date: "10/27/2017"
+output: html_document
+---
+
+# Setup
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  fig.width = 7,
+  fig.asp = 1,
+  out.width = "110%")
+library(janitor)
+library(lubridate)
+library(readxl)
+library(tidyverse)
+library(dplyr)
+```
+
+## Load and Tidy data-Lead
+```{r load and tidy the data}
+# load and tidy the pols_month dataset
+pols_data = read_csv("./fivethirtyeight_datasets/pols-month.csv") %>% 
+  clean_names() %>% 
+  na.omit() %>% 
+  rename(date = mon) %>% 
+  mutate(date = floor_date(ymd(date), "month")) %>% 
+  mutate(president = recode(prez_gop, `0` = "dem", `1` = "gop", `2` = "gop")) %>%
+  select(-prez_dem, -prez_gop)
+
+
+# load and tidy the  GDP data
+GDP_data = read_csv("./fivethirtyeight_datasets/GDP.csv") %>% 
+  clean_names() %>% 
+  filter(!(value == ".")) %>% 
+  mutate(date = as.Date(date))
+
+
+
+# combine the two datasets to pols_GDP_data
+pols_GDP_data = left_join(pols_data, GDP_data, by = "date")
+```

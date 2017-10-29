@@ -1,0 +1,11 @@
+"0","GDP_data = read_csv(""./fivethirtyeight_datasets/GDP.csv"") %>% 
+  clean_names() %>% 
+  filter(!(value == ""."")) %>% 
+  mutate(date = as.Date(date))
+"
+"2","Parsed with column specification:
+cols(
+  DATE = col_date(format = """"),
+  VALUE = col_character()
+)
+"

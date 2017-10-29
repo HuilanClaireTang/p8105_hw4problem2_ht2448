@@ -1,0 +1,36 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","knitr::opts_chunk$set("
+"0","  fig.width = 7,"
+"0","  fig.asp = 1,"
+"0","  out.width = ""110%"")"
+"0","library(janitor)"
+"0","library(lubridate)"
+"2","
+Attaching package: ‘lubridate’
+
+"
+"2","The following object is masked from ‘package:base’:
+
+    date
+
+"
+"0","library(readxl)"
+"0","library(tidyverse)"
+"2","Loading tidyverse: ggplot2
+Loading tidyverse: tibble
+Loading tidyverse: tidyr
+Loading tidyverse: readr
+Loading tidyverse: purrr
+Loading tidyverse: dplyr
+"
+"2","Conflicts with tidy packages ---------------------------------
+"
+"2","as.difftime(): lubridate, base
+date():        lubridate, base
+filter():      dplyr, stats
+intersect():   lubridate, base
+lag():         dplyr, stats
+setdiff():     lubridate, base
+union():       lubridate, base
+"
+"0","library(dplyr)"
